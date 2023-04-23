@@ -7,10 +7,6 @@ export const NotesView = ({ token, onLoggedOut }) => {
     const [list, setList] = useState([]);
 
     useEffect(() => {
-        getNotes();
-    }, [token]);
-
-    const getNotes = () => {
         fetch("https://todoapp-afqp.onrender.com/api/users/user-note", {
             method: "GET",
             headers: {
@@ -22,7 +18,7 @@ export const NotesView = ({ token, onLoggedOut }) => {
             .then(data => {
                 setList(data);
             });
-    }
+    }, [token]);
 
     return (
         <>
@@ -73,7 +69,7 @@ export const NotesView = ({ token, onLoggedOut }) => {
                         </ul>
                     </div>
                 </div>
-                <button className="add-item"><b>+</b></button>
+                <button className="add-item" onClick={() => setEditing(false)}><b>+</b></button>
             </div>
             {editing ? <Editor /> : <></>}
         </>
