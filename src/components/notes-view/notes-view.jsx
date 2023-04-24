@@ -69,9 +69,9 @@ export const NotesView = ({ token, onLoggedOut }) => {
                         </ul>
                     </div>
                 </div>
-                <button className="add-item" onClick={() => setEditing(false)}><b>+</b></button>
+                <button className="add-item" onClick={() => setEditing(true)}><b>+</b></button>
             </div>
-            {editing ? <Editor /> : <></>}
+            {editing ? <Editor token={token} onClose={() => setEditing(false)} /> : null}
         </>
     );
 }
