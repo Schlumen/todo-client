@@ -5,6 +5,7 @@ import { Editor } from "../editor/editor";
 export const NotesView = ({ token, onLoggedOut }) => {
     const [editing, setEditing] = useState(false);
     const [list, setList] = useState([]);
+    const [todo, setTodo] = useState();
 
     useEffect(() => {
         fetch("https://todoapp-afqp.onrender.com/api/users/user-note", {
@@ -18,7 +19,7 @@ export const NotesView = ({ token, onLoggedOut }) => {
             .then(data => {
                 setList(data);
             });
-    }, [token]);
+    }, [editing, token]);
 
     return (
         <>
@@ -32,7 +33,14 @@ export const NotesView = ({ token, onLoggedOut }) => {
                         <ul className="note-list list-A">
                             {list.map(note => {
                                 if (note.category === "A") {
-                                    return (<li key={note._id} className="note-list-item">{note.title}</li>)
+                                    return (<li
+                                        key={note._id}
+                                        className="note-list-item"
+                                        onClick={() => {
+                                            setTodo(note);
+                                            setEditing(true);
+                                        }}
+                                    >{note.title}</li>)
                                 }
                                 return null;
                             })}
@@ -42,7 +50,14 @@ export const NotesView = ({ token, onLoggedOut }) => {
                         <ul className="note-list list-B">
                             {list.map(note => {
                                 if (note.category === "B") {
-                                    return (<li key={note._id} className="note-list-item">{note.title}</li>)
+                                    return (<li
+                                        key={note._id}
+                                        className="note-list-item"
+                                        onClick={() => {
+                                            setTodo(note);
+                                            setEditing(true);
+                                        }}
+                                    >{note.title}</li>)
                                 }
                                 return null;
                             })}
@@ -52,7 +67,14 @@ export const NotesView = ({ token, onLoggedOut }) => {
                         <ul className="note-list list-C">
                             {list.map(note => {
                                 if (note.category === "C") {
-                                    return (<li key={note._id} className="note-list-item">{note.title}</li>)
+                                    return (<li
+                                        key={note._id}
+                                        className="note-list-item"
+                                        onClick={() => {
+                                            setTodo(note);
+                                            setEditing(true);
+                                        }}
+                                    >{note.title}</li>)
                                 }
                                 return null;
                             })}
@@ -62,16 +84,31 @@ export const NotesView = ({ token, onLoggedOut }) => {
                         <ul className="note-list list-D">
                             {list.map(note => {
                                 if (note.category === "D") {
-                                    return (<li key={note._id} className="note-list-item">{note.title}</li>)
+                                    return (<li
+                                        key={note._id}
+                                        className="note-list-item"
+                                        onClick={() => {
+                                            setTodo(note);
+                                            setEditing(true);
+                                        }}
+                                    >{note.title}</li>)
                                 }
                                 return null;
                             })}
                         </ul>
                     </div>
                 </div>
-                <button className="add-item" onClick={() => setEditing(true)}><b>+</b></button>
+                <button
+                    className="add-item"
+                    onClick={() => {
+                        setTodo(null);
+                        setEditing(true);
+                    }}
+                >
+                    <b>+</b>
+                </button>
             </div>
-            {editing ? <Editor token={token} onClose={() => setEditing(false)} /> : null}
+            {editing ? <Editor token={token} note={todo} onClose={() => setEditing(false)} /> : null}
         </>
     );
 }
