@@ -29,6 +29,25 @@ export const Editor = ({ token, note, onClose }) => {
             });
     }
 
+    const deleteNote = () => {
+        if (id) {
+            fetch("https://todoapp-afqp.onrender.com/api/users/user-note", {
+                method: "DELETE",
+                body: JSON.stringify({ noteId: id }),
+                headers: {
+                    Authorization: token,
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(response => response.json())
+                .then(responseData => {
+                    if (!responseData.success) {
+                        alert(responseData.message);
+                    }
+                });
+        }
+    }
+
     return (
         <div className="modal-container">
             <form
@@ -59,40 +78,52 @@ export const Editor = ({ token, note, onClose }) => {
                     onChange={e => setContent(e.target.value)}
                 ></textarea>
                 <div className="modal-footer">
-                    <div className="toggle">
-                        <label>Important
-                            <input
-                                type="checkbox"
-                                checked={category === "A" || category === "B"}
-                                onChange={() => {
-                                    category === "A" ? setCategory("C") :
-                                        category === "B" ? setCategory("D") :
-                                            category === "C" ? setCategory("A") : setCategory("B");
-                                }}
-                            />
-                            <span className="slider"></span>
-                        </label>
+                    <div className="toggle-container">
+                        <div className="toggle mr10">
+                            <label>Important
+                                <input
+                                    type="checkbox"
+                                    checked={category === "A" || category === "B"}
+                                    onChange={() => {
+                                        category === "A" ? setCategory("C") :
+                                            category === "B" ? setCategory("D") :
+                                                category === "C" ? setCategory("A") : setCategory("B");
+                                    }}
+                                />
+                                <span className="slider"></span>
+                            </label>
+                        </div>
+                        <div className="toggle">
+                            <label>Urgent
+                                <input
+                                    type="checkbox"
+                                    checked={category === "A" || category === "C"}
+                                    onChange={() => {
+                                        category === "A" ? setCategory("B") :
+                                            category === "B" ? setCategory("A") :
+                                                category === "C" ? setCategory("D") : setCategory("C");
+                                    }}
+                                />
+                                <span className="slider"></span>
+                            </label>
+                        </div>
                     </div>
-                    <div className="toggle">
-                        <label>Urgent
-                            <input
-                                type="checkbox"
-                                checked={category === "A" || category === "C"}
-                                onChange={() => {
-                                    category === "A" ? setCategory("B") :
-                                        category === "B" ? setCategory("A") :
-                                            category === "C" ? setCategory("D") : setCategory("C");
-                                }}
-                            />
-                            <span className="slider"></span>
-                        </label>
+                    <div>
+                        <button
+                            type="button"
+                            className="modal-save mr10"
+                            onClick={() => {
+                                deleteNote();
+                                onClose();
+                            }}
+                        >Delete</button>
+                        <button
+                            type="submit"
+                            className="modal-save"
+                        >Save</button>
                     </div>
-                    <button
-                        type="submit"
-                        className="modal-save"
-                    >Save</button>
                 </div>
-            </form>
-        </div>
+            </form >
+        </div >
     )
 }

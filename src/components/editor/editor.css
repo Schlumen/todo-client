@@ -82,8 +82,17 @@
     font-family: 'Segoe UI';
     padding: 6px 15px;
     cursor: pointer;
-    float: right;
     margin-top: 10px;
+}
+
+.mr10 {
+    margin-right: 10px;
+}
+
+.toggle-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .toggle label {
