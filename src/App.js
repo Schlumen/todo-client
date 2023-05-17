@@ -1,10 +1,13 @@
+import { Component } from 'react';
 import './App.css';
 import { MainView } from './components/main-view/main-view';
 
-function App() {
-    return (
-        <MainView />
-    );
+class App extends Component {
+    render() {
+        return (
+            <MainView />
+        )
+    };
 }
 
 export default App;

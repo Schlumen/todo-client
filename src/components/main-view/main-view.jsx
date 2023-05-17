@@ -4,8 +4,6 @@ import { SignupView } from "../signup-view/signup-view";
 import { NotesView } from "../notes-view/notes-view";
 import { useState } from "react";
 
-const basename = process.env.NODE_ENV === 'development' ? '/' : '/todo-crud-app';
-
 export const MainView = () => {
     const storedUser = localStorage.getItem("user");
     const storedToken = localStorage.getItem("token");
@@ -14,7 +12,7 @@ export const MainView = () => {
     const [token, setToken] = useState(storedToken ? storedToken : null);
 
     return (
-        <BrowserRouter basename={basename}>
+        <BrowserRouter>
             <Routes>
                 <Route
                     path="/"
