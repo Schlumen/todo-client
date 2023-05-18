@@ -21,6 +21,19 @@ export const NotesView = ({ token, onLoggedOut }) => {
             });
     }, [editing, token]);
 
+    const getListItem = (note) => {
+        return (
+            <li
+                key={note._id}
+                className={`note-list-item${note.done ? " done" : ""}`}
+                onClick={() => {
+                    setTodo(note);
+                    setEditing(true);
+                }}
+            >{note.title}</li>
+        );
+    }
+
     return (
         <>
             <div className="notes-view-wrapper">
@@ -30,68 +43,44 @@ export const NotesView = ({ token, onLoggedOut }) => {
                 </nav>
                 <div className="notes-wrapper">
                     <div className="note-category" id="A">
+                        <h2 id="ui">Urgent and Important</h2>
                         <ul className="note-list list-A">
                             {list.map(note => {
                                 if (note.category === "A") {
-                                    return (<li
-                                        key={note._id}
-                                        className="note-list-item"
-                                        onClick={() => {
-                                            setTodo(note);
-                                            setEditing(true);
-                                        }}
-                                    >{note.title}</li>)
+                                    return getListItem(note);
                                 }
                                 return null;
                             })}
                         </ul>
                     </div>
                     <div className="note-category" id="B">
+                        <h2 id="i">Important but not Urgent</h2>
                         <ul className="note-list list-B">
                             {list.map(note => {
                                 if (note.category === "B") {
-                                    return (<li
-                                        key={note._id}
-                                        className="note-list-item"
-                                        onClick={() => {
-                                            setTodo(note);
-                                            setEditing(true);
-                                        }}
-                                    >{note.title}</li>)
+                                    return getListItem(note);
                                 }
                                 return null;
                             })}
                         </ul>
                     </div>
                     <div className="note-category" id="C">
+                        <h2 id="u">Urgent but not Important</h2>
                         <ul className="note-list list-C">
                             {list.map(note => {
                                 if (note.category === "C") {
-                                    return (<li
-                                        key={note._id}
-                                        className="note-list-item"
-                                        onClick={() => {
-                                            setTodo(note);
-                                            setEditing(true);
-                                        }}
-                                    >{note.title}</li>)
+                                    return getListItem(note);
                                 }
                                 return null;
                             })}
                         </ul>
                     </div>
                     <div className="note-category" id="D">
+                        <h2 id="n">Neither Urgent nor Important</h2>
                         <ul className="note-list list-D">
                             {list.map(note => {
                                 if (note.category === "D") {
-                                    return (<li
-                                        key={note._id}
-                                        className="note-list-item"
-                                        onClick={() => {
-                                            setTodo(note);
-                                            setEditing(true);
-                                        }}
-                                    >{note.title}</li>)
+                                    return getListItem(note);
                                 }
                                 return null;
                             })}

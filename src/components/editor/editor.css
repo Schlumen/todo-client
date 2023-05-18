@@ -119,6 +119,10 @@
 	border-radius: 1em;
 }
 
+.toggle .done-slider {
+    background-color: #686868;
+}
+
 .toggle .slider:before {
 	/* verschiebbarer Button */
 	position: absolute;
@@ -134,6 +138,10 @@
 
 .toggle input:checked + .slider {
 	background-color: #5a9900;
+}
+
+.toggle input:checked + .done-slider {
+	background-color: #003cff;
 }
 
 .toggle input:checked + .slider:before {

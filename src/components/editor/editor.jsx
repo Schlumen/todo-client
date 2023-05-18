@@ -5,10 +5,11 @@ export const Editor = ({ token, note, onClose }) => {
     const [title, setTitle] = useState(note ? note.title : null);
     const [content, setContent] = useState(note ? note.content : null);
     const [category, setCategory] = useState(note ? note.category : "D");
+    const [done, setDone] = useState(note ? note.done : false);
     const id = note ? note._id : null;
 
     const saveNote = () => {
-        let data = { title, content, category };
+        let data = { title, content, category, done };
         if (id) data.noteId = id;
 
         let params = {
@@ -93,7 +94,7 @@ export const Editor = ({ token, note, onClose }) => {
                                 <span className="slider"></span>
                             </label>
                         </div>
-                        <div className="toggle">
+                        <div className="toggle mr10">
                             <label>Urgent
                                 <input
                                     type="checkbox"
@@ -105,6 +106,19 @@ export const Editor = ({ token, note, onClose }) => {
                                     }}
                                 />
                                 <span className="slider"></span>
+                            </label>
+                        </div>
+
+                        <div className="toggle">
+                            <label>Done
+                                <input
+                                    type="checkbox"
+                                    checked={done}
+                                    onChange={() => {
+                                        setDone(!done);
+                                    }}
+                                />
+                                <span className="slider done-slider"></span>
                             </label>
                         </div>
                     </div>

@@ -41,8 +41,34 @@
     min-height: 20px;
 }
 
+h2 {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 15px 0;
+    font-size: 20px;
+    font-weight: 650;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#ui {
+    color: rgba(81, 139, 93, 1);
+}
+
+#i {
+    color: rgba(207, 143, 47, 1);
+}
+
+#u {
+    color: rgba(46, 127, 185, 1);
+}
+
+#n {
+    color: rgba(176, 36, 36, 1);
+}
+
 .note-list {
     padding-left: 15px;
+    padding-right: 15px;
 }
 
 .note-list-item {
@@ -87,6 +113,10 @@
 
 #D {
     background-color: rgba(176, 36, 36, 0.4);
+}
+
+.done {
+    text-decoration: line-through;
 }
 
 @media (max-width: 600px) {
